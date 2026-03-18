@@ -32,7 +32,7 @@ public class TrainTicket {
         return "Passenger Name: %s\n".formatted(name)
                 + "Destination: %s\n".formatted(destination)
                 + "Class: %s\n".formatted(ticket_class)
-                + "Total Price: R%f".formatted(price);
+                + "Total Price: R%.2f".formatted(price);
 
     }
 

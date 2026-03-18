@@ -1,10 +1,9 @@
 package org.Eduvos.Q2;
 
 import javax.swing.*;
-import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // lots of stuff from here
         // https://github.com/JetBrains/build-UI-using-Swing-sample-project
         SwingUtilities.invokeLater(new Runnable() {

@@ -33,7 +33,7 @@ public class UI extends JFrame{
 
         setContentPane(contentPanel);
 
-        // set combobox default to nothig
+        // set combobox default to nothing
         // https://stackoverflow.com/questions/6276177/jcombobox-want-first-entry-to-be-blank-entry
         ticketClasscomboBox.setSelectedIndex(-1);
 
