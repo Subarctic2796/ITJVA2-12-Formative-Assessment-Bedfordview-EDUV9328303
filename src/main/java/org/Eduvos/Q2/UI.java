@@ -16,9 +16,14 @@ public class UI extends JFrame{
     private JButton addTicketBtn;
     private JTextField passengerNameTextField;
     private JTextField destinationTextField;
+    // use a combo box as this stops users from
+    // entering an invalid option for the ticket class
     private JComboBox<String> ticketClasscomboBox;
 
-    private ArrayList<TrainTicket> tickets = new ArrayList<>();
+    // store tickets
+    private final ArrayList<TrainTicket> tickets = new ArrayList<>();
+    // use to build the string of tickets to show to the user
+    private final StringBuilder sb = new StringBuilder();
 
     public UI() {
         setMinimumSize(new Dimension(500, 500));
@@ -36,44 +41,50 @@ public class UI extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
+                // get the ticket
                 TrainTicket ticket = getTrainTicket();
                 if (ticket == null) return;
                 tickets.add(ticket);
 
-                // show all tickets
-                StringBuilder sb = new StringBuilder();
-                for (TrainTicket t : tickets) {
-                    sb.append(t.toString());
-                    sb.append("\n--------------------------\n");
-                }
+                // only add the most recent ticket
+                sb.append(ticket);
+                sb.append("\n--------------------------\n");
 
+                // actually show the user
                 ticketInfoTextArea.setText(sb.toString());
 
-                // reset combobox to empty default
+                // reset everything to a clean state
                 ticketClasscomboBox.setSelectedIndex(-1);
+                passengerNameTextField.setText("");
+                destinationTextField.setText("");
             }
         });
     }
 
     private TrainTicket getTrainTicket() {
         String name = passengerNameTextField.getText();
+        // make sure not empty
         if (Objects.equals(name, "")) {
             JOptionPane.showMessageDialog(null, "must enter passenger name");
             return null;
         }
 
         String destination = destinationTextField.getText();
+        // make sure not empty
         if (Objects.equals(destination, "")) {
             JOptionPane.showMessageDialog(null, "must enter a destination");
             return null;
         }
 
         int idx = ticketClasscomboBox.getSelectedIndex();
+        // make sure not empty
         if (idx == -1) {
             JOptionPane.showMessageDialog(null, "must choose either Economy or Business");
             return null;
         }
-        System.out.printf("selected idx: %d\n", idx);
+
+        // determine the tickets class
         TicketClass ticketClass = switch (idx) {
             case 0 -> TicketClass.ECONOMY;
             case 1 -> TicketClass.BUSINESS;
